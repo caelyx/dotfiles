@@ -15,10 +15,11 @@ export PS1="%m %(!.%{[0;1;37;41m%} # %{[0m%}.%{[0;1;34m%}%%) %{[0m%}"
 export RPROMPT='%3~'
 export PYTHONSTARTUP=~/.pythonrc
 
-if [[ `uname` = 'Darwin' ]];
-	alias ls='ls -G -F'
-elif [[ `uname` = 'Linux' ]];
-	alias ls='ls --color=auto -F'
+
+if [[ `uname` = 'Darwin' ]]; then
+    alias ls='ls -G -F';
+elif [[ `uname` = 'Linux' ]]; then
+    alias ls='ls --color=auto -F';
 fi
 
 alias -g G=' | egrep '
