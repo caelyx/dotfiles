@@ -1,0 +1,54 @@
+set move=no
+set mbox_type=Maildir
+set edit_headers=yes
+
+set pager_index_lines=6
+
+set pgp_timeout=3600
+
+set mark_old = yes
+
+#[start 1] following lines from http://www.bolverk.net/muttrc.html
+set from="simon@caelyx.net"
+set realname="Simon Brown"
+my_hdr X-Conspiracy: There is no PSU
+set postpone=ask-no
+#don't sign stuff to these people
+#webmail accounts
+send-hook address@hotmail\.com unset pgp_autosign
+send-hook address@yahoo\.com unset pgp_autosign
+send-hook address@yahoo\.com unset pgp_autosign
+send-hook address@yahoo\.com unset pgp_autosign
+send-hook address@yahoo\.com unset pgp_autosign
+send-hook 'address@excite.com' unset pgp_autosign
+#[end 1]
+
+color status black white
+color indicator default blue
+color normal white default
+color attachment brightyellow default
+color hdrdefault cyan default
+color markers brightred default
+color quoted    green default
+color signature cyan default
+color tilde     blue default
+color tree      red default
+color body     brightred default [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
+color body     brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
+
+color quoted1 brightyellow default
+color quoted2 red default
+color hdrdefault cyan default
+color header   brightred default ^Subject:
+color header   brightgreen default ^From:
+color signature cyan default
+
+color index green default ~p  # To me
+color index brightyellow default ~N  # New
+
+color index blue default ~T # Tagged
+color index red default ~D # Deleted
+
+
+# This is who we are
+alternates simon@caelyx.net , simon.brown@gmail.com , simonbrown@westpac.com.au

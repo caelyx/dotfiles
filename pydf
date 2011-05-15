@@ -1,0 +1,313 @@
+#! /usr/bin/python
+
+import sys, os, string, getopt, types
+try:
+    from statvfs import *
+    statvfs=os.statvfs
+except ImportError:
+    F_BSIZE   = 0       # Preferred file system block size
+    F_FRSIZE  = 1       # Fundamental file system block size
+    F_BLOCKS  = 2       # Total number of file system blocks (FRSIZE)
+    F_BFREE   = 3       # Total number of free blocks
+    F_BAVAIL  = 4       # Free blocks available to non-superuser
+    F_FILES   = 5       # Total number of file nodes
+    F_FFREE   = 6       # Total number of free file nodes
+    F_FAVAIL  = 7       # Free nodes available to non-superuser
+    F_FLAG    = 8       # Flags (see your local statfs man page)
+    F_NAMEMAX = 9       # Maximum file name length
+    import commands
+    def statvfs(fs):        
+        l = string.split(commands.getoutput(statfs_command + " " + fs))
+        del l[0]
+        l1 = []
+        for i in l:
+            try:
+                l1.append(string.atoi(i))
+            except ValueError:
+                l1.append(0)
+        l1.insert(1, l1[0])
+        l1.insert(6, l1[6])
+        l1.insert(8, 0)
+        return(l1)
+
+
+#some default definitions
+colours = {    
+            'none'       :    "",
+            'default'    :    "\033[0m",
+            'bold'       :    "\033[1m",
+            'underline'  :    "\033[4m",
+            'blink'      :    "\033[5m",
+            'reverse'    :    "\033[7m",
+            'concealed'  :    "\033[8m",
+
+            'black'      :    "\033[30m", 
+            'red'        :    "\033[31m",
+            'green'      :    "\033[32m",
+            'yellow'     :    "\033[33m",
+            'blue'       :    "\033[34m",
+            'magenta'    :    "\033[35m",
+            'cyan'       :    "\033[36m",
+            'white'      :    "\033[37m",
+
+            'on_black'   :    "\033[40m", 
+            'on_red'     :    "\033[41m",
+            'on_green'   :    "\033[42m",
+            'on_yellow'  :    "\033[43m",
+            'on_blue'    :    "\033[44m",
+            'on_magenta' :    "\033[45m",
+            'on_cyan'    :    "\033[46m",
+            'on_white'   :    "\033[47m",
+
+            'beep'       :    "\007"
+            }
+
+
+normal_colour = 'default'
+header_colour = 'yellow'
+local_fs_colour = 'default'
+remote_fs_colour = 'green'
+special_fs_colour = 'blue'
+
+filled_fs_colour = 'red'
+full_fs_colour = 'magenta'
+
+sizeformat = "-h"
+
+FILL_THRESH = 85.0
+FULL_THRESH = 99.0
+
+format = [    
+            ('fs', 15, "l"), ('size', 9, "r"), 
+            ('used', 9, "r"), ('avail', 9, "r"), ('perc', 5, "r"),
+            ('bar', 8, "l"), ('on', 16, "l")
+         ]
+
+barchar = '#'
+
+mountfile = "/etc/mtab"
+
+statfs_command = "/usr/bin/statfs -t"
+
+#end of default definitions
+
+
+header =    {        
+            'fs'     :    "Filesystem",
+            'size'   :    "Size",
+            'used'   :    "Used",
+            'avail'  :    "Avail",
+            'on'     :    "Mounted on",
+            'fstype' :    "Type",
+            'perc'   :    "Use%",
+            'bar'    :    ""
+            }
+
+
+def hfnum(size, power):
+    "human readable number"
+    if size == 0:
+        return "0"
+    units = ["k", "M", "G", "T"]
+    r = `size`[:-1] + "B"
+    for i in range(len(units)):
+        if size/power > 9:
+            size = size/power
+            r = `size`[:-1] + units[i]
+    return r
+
+
+def myformat(number, sizeformat, blocksize):
+    "format number as file size"
+    size = long(number)*blocksize
+    units = ["k", "M", "G", "T"]
+    if sizeformat == "-k":
+        return `size/1024`[:-1]
+    elif sizeformat == "-m":
+        return `size/(1024*1024)`[:-1]
+    elif sizeformat == "-h":
+        return hfnum(size, 1024)
+    elif sizeformat == "-H":
+        return hfnum(size, 1000)
+    elif sizeformat == "--blocks":
+        return `number`
+
+def fsline(mtab, sizeformat, blocksize):
+    "return list full of desired information about filesystem fs"
+    mtabline = string.split(mtab)
+    try:
+        status = statvfs(mtabline[1])
+    except:
+        status = 10*[0]
+    if blocksize == 0:
+        blocksize = status[F_FRSIZE]
+    if blocksize == 0:
+        blocksize = status[F_BSIZE]
+    used = long(status[F_BLOCKS]-status[F_BFREE])
+    line = {
+            'fs'     :    mtabline[0],
+            'size'   :    myformat(long(status[F_BLOCKS]), sizeformat, blocksize),
+            'used'   :    myformat(used, sizeformat, blocksize),
+            'avail'  :    myformat(long(status[F_BAVAIL]), sizeformat, blocksize),
+            'on'     :    mtabline[1],
+            'fstype' :    mtabline[2]
+            }
+    try:
+        line['perc'] = `round(100.*used/(used + status[F_BAVAIL]))`
+    except ZeroDivisionError:
+        line['perc'] = "0"
+    line['bar'] = "[###############]"
+    return line
+
+def myatof(s):
+    "like atof, but be friendly to non-numerical values"
+    try:
+        return string.atof(s)
+    except ValueError:
+        return 0
+
+
+def manglestring(s, l, pos):
+    "cut string to fit exactly into l chars"
+    if pos == "r":
+        ns = string.rjust(s, l)
+    elif pos == "l":
+        ns = string.ljust(s, l)
+    elif pos == "c":
+        ns = string.center(s, l)
+    else:
+        raise ValueError, 'Error in manglestring'
+    if len(ns) > l:
+        ns = ns[:l/2] + "~" + ns[-l/2+1:]
+    return ns
+
+def makecolour(clist):
+    "take list (or tuple or just one name) of colour names and return string of ANSI definitions"
+    s = ""
+    if type(clist) == types.StringType:
+        lclist = [clist]
+    else:
+        lclist = clist
+    for i in lclist:
+        s = s + colours[i]
+    return s
+
+def help():
+    print "Usage: pydf [OPTIONS]"
+    print "Show information about mounted filesystems"
+    print
+    print "-a, --all               include filesystems having 0 blocks"
+    print "-h, --human-readable    print sizes in human readable format (e.g., 1K 234M 2G)"
+    print "-H, --si                likewise, but use powers of 1000 not 1024"
+    print "    --blocks-size=SIZE  use SIZE-byte blocks"
+    print "-k, --kilobytes         like --block-size=1024"
+    print "-l, --local             limit listing to local filesystems"
+    print "-m, --megabytes         like --block-size=1048576"
+    print "    --blocks            use filesystem native block size"
+    print "    --bw                do not use colours"
+    print "    --mounts=FILE       file to get mount information from."
+    print "                        On normal linux system, only /etc/mtab"
+    print "                        or /proc/mounts make sense."
+    print "                        Use /proc/mounts when /etc/mtab is corrupted"
+    print "                        or inaccesable (the output looks a bit weird"
+    print "                        in this case though)"
+    print "    --help              display this help and exit"
+    print "    --version           output version information and exit"
+    sys.exit()
+
+def version():
+    print "pydf 0.9.6"
+    sys.exit()
+
+
+# the fun begins here
+for i in ["/etc/pydfrc", os.environ['HOME']+"/.pydfrc"]:
+    if os.path.isfile(i):
+        execfile(i)
+    
+
+try:
+    optlist, args = getopt.getopt(sys.argv[1:], "hHkmal",
+                                ["human-readable", "si", "kilobytes", 
+                                 "megabytes", "blocks", "bw", 
+                                 "mounts=", "version", "block-size=",
+                                 "all", "local"])
+except:
+    help()
+
+blocksize = 0
+allfss = 0
+localonly = 0
+
+for i in optlist:
+    if i[0] in ["--human-readable", "-h"]:
+        sizeformat = "-h"
+    elif i[0] in ["--si", "-H"]:
+        sizeformat = "-H"
+    elif i[0] in ["--kilobytes", "-k"]:
+        sizeformat = "-k"
+    elif i[0] in ["--megabytes", "-m"]:
+        sizeformat = "-m"
+    elif i[0] == "--blocks":
+        sizeformat = "--blocks"
+    elif i[0] == "--bw":
+        normal_colour = header_colour = local_fs_colour = remote_fs_colour = special_fs_colour = filled_fs_colour = full_fs_colour = 'none'
+    elif i[0] == "--mounts":
+        mountfile = i[1]
+    elif i[0] == "--block-size":
+        blocksize = string.atoi(i[1])
+    elif i[0] == "--version":
+        version()
+    elif i[0] in ["--all", "-a"]:
+        allfss = 1
+    elif i[0] in ["--local", "-l"]:
+        localonly = 1
+
+
+if args != []:
+    help()
+
+f = open(mountfile,"r")
+mountlines = f.readlines()
+
+lines = [header]
+for mountline in mountlines:
+    mountline_list = string.split(mountline)
+    lines.append(fsline(mountline, sizeformat, blocksize))
+    
+for i in lines:
+    displayfs = 1
+    if i['fs'] == "Filesystem":
+        current_colour = header_colour
+    elif i['fstype'] in [ "nfs", "smbfs", "ncpfs", "afs", "coda" ]:
+        current_colour = remote_fs_colour
+        if localonly:
+            displayfs = 0
+    elif i['size'] == "0":
+        current_colour = special_fs_colour
+        if not allfss:
+            displayfs = 0
+    else:
+        current_colour = local_fs_colour
+    if displayfs:
+        for j in format:
+            print makecolour(current_colour),
+            sys.stdout.write('')
+            if j[0] in ['perc', 'avail', 'bar'] and i['fstype'] <> "iso9660":
+                if myatof(i['perc']) > FILL_THRESH:
+                    print makecolour(filled_fs_colour),
+                    sys.stdout.write('')
+                if myatof(i['perc']) > FULL_THRESH:
+                    print makecolour(full_fs_colour),
+                    sys.stdout.write('')
+            if j[0] == 'bar':
+                print '[',
+                sys.stdout.write('')
+                barsize = int(j[1]*myatof(i['perc'])/100.+0.5)
+                print manglestring(barsize*barchar, j[1], j[2]),
+                sys.stdout.write('')
+                print ']',
+            else:
+                print manglestring(i[j[0]], j[1], j[2]),
+        print colours['default']
+print colours['default'],
