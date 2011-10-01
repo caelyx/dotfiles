@@ -35,9 +35,6 @@ autocmd BufNewFile *.html | execute "normal :\<kEnter>i\<html>\<kEnter><head>\<k
 " Use ,b to wordwrap lines to 78 characters
 map ,b :s/\v^(.{,78} )/\1\r/<CR>:nohlsearch<CR> 
 
-" I never use tab for spacing, and it's a damn sight more useful as completion
-imap <Tab> <C-n>
-
 " Font Commands for GViM
 :map <f9> :set guifont=Courier:h9:<Cr> 
 :map <f11> :set guifont=Courier:h11<Cr> 
