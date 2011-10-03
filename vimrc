@@ -3,7 +3,7 @@
 " Syntax highlighint a must
 syn on
 " A nice readable non-default color scheme
-colo evening
+colo torte
 
 " SET commands
 " Turn off the task menu
