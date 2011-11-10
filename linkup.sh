@@ -1,6 +1,7 @@
 #!/bin/bash
 
-for x in muttrc muttrc.color pythonrc screenrc vimrc zshrc; do
-    ln -s `pwd`/$x ~/.$x;
+for x in muttrc muttrc.color pythonrc screenrc zshrc; do
+	ln -s `pwd`/$x ~/.$x;
 done;
 
+ln -s `pwd`/vimrc ~/.vimrc.local;

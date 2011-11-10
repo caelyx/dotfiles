@@ -1,39 +1,11 @@
 " Yet another .vimrc, this one by Simon Brown (caelyx) <projects@caelyx.net>
 
-" Syntax highlighint a must
-syn on
-" A nice readable non-default color scheme
-colo torte
+color molokai
+let mapleader = ","
+set history=1000
+set hidden
+set guioptions-=rL
 
-" SET commands
-" Turn off the task menu
-set guioptions-=T
-" Turn off the menu bar
-set guioptions-=m
-" Turn of highlighting of searches
-set nohls
-" Use a semi-standard tab stop of 8 spaces
-set ts=8
-" Use a 4 character shift-width for indenting code
-set sw=4
-" Semi-intelligent smart indenting a must
-set smartindent
-" Default GUI font of Courier for when using GVIM
-set gfn=Courier:h14    
-" Wrapping sucks, turn it on specifically if you need it
-set nowrap
-" Show where I'm at at all times
-set ruler
-
-" AUTOCMD commands
-" Get vim to play nicely with mutt
-autocmd BufNewFile,BufRead mutt* set expandtab tw=72 sts=8 ts=8 shiftwidth=8
-" Create a skeleton html file when opening a new one.
-autocmd BufNewFile *.html | execute "normal :\<kEnter>i\<html>\<kEnter><head>\<kEnter><title>title</title>\<kEnter><script>\<kEnter></script>\<kEnter></head>\<kEnter><body>\<kEnter></body>\<kEnter></html>\<ESC>gg"
-
-" MAP commands
-" Use ,b to wordwrap lines to 78 characters
-map ,b :s/\v^(.{,78} )/\1\r/<CR>:nohlsearch<CR> 
 
 " Font Commands for GViM
 :map <f9> :set guifont=Courier:h9:<Cr> 
@@ -44,20 +16,63 @@ map ,b :s/\v^(.{,78} )/\1\r/<CR>:nohlsearch<CR>
 nmap <F12>   :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<cr> 
 nmap <S-F12> :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<cr>
 
-" Comment adding commands for various languages
-" 0. Clearing Comments
-map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:nohlsearch<CR> 
-" 1. LHS-only comment
-map ,# :s/^/#/<CR>:nohlsearch<CR> 
-map ,/ :s/^/\/\//<CR>:nohlsearch<CR> 
-map ,> :s/^/> /<CR>:nohlsearch<CR> 
-map ," :s/^/\"/<CR>:nohlsearch<CR> 
-map ,% :s/^/%/<CR>:nohlsearch<CR> 
-map ,! :s/^/!/<CR>:nohlsearch<CR> 
-map ,; :s/^/;/<CR>:nohlsearch<CR> 
-map ,- :s/^/--/<CR>:nohlsearch<CR> 
-" 2. Wrapping Comments
-map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>:nohlsearch<CR> 
-map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:nohlsearch<CR> 
-map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>:nohlsearch<CR> 
-map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:nohlsearch<CR>
+
+" TextMate style parenthesis, etc matching 
+" From http://concisionandconcinnity.blogspot.com/2009/07/vim-part-ii-matching-pairs.html
+
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+autocmd Syntax html,vim inoremap < <lt>><Left>
+function! ClosePair(char)
+  if getline('.')[col('.') - 1] == a:char
+    return "\<Right>"
+  else
+    return a:char
+  endif
+endf
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap } <c-r>=ClosePair('}')<CR>
+function! QuoteDelim(char)
+let line = getline('.')
+let col = col('.')
+if line[col - 2] == "\\"
+"Inserting a quoted quotation mark into the string
+return a:char
+elseif line[col - 1] == a:char
+"Escaping out of the string
+return "\<Right>"
+else
+"Starting a string
+return a:char.a:char."\<Left>"
+endif
+endf 
+inoremap " <c-r>=QuoteDelim('"')<CR>
+inoremap ' <c-r>=QuoteDelim("'")<CR>
+vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap "  <ESC>`>a"<ESC>`<i"<ESC>
+vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
+vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
+vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
+function! InAnEmptyPair()
+let cur = strpart(getline('.'),getpos('.')[2]-2,2)
+for pair in (split(&matchpairs,',') + ['":"',"':'"])
+if cur == join(split(pair,':'),'')
+return 1
+endif
+endfor
+return 0
+endfunc
+func! DeleteEmptyPairs()
+if InAnEmptyPair()
+return "\<Left>\<Del>\<Del>"
+else
+return "\<BS>"
+endif
+endfunc
+inoremap <expr> <BS> DeleteEmptyPairs()
