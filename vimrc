@@ -5,16 +5,12 @@ let mapleader = ","
 set history=1000
 set hidden
 set guioptions-=rL
+set guifont=Menlo\ Regular:h18
 
 
-" Font Commands for GViM
-:map <f9> :set guifont=Courier:h9:<Cr> 
-:map <f11> :set guifont=Courier:h11<Cr> 
-:map <S-f9> :set guifont=Courier_New:h9<Cr> 
-:map <S-f11> :set guifont=Courier_New:h11<Cr> 
-" Font bigger/smaller adjustment
-nmap <F12>   :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<cr> 
-nmap <S-F12> :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<cr>
+" Font bigger/smaller adjustment; only works on OS X
+nmap <F12>   :macaction fontSizeUp:<CR>
+nmap <S-F12> :macaction fontSizeDown:<CR>
 
 
 " TextMate style parenthesis, etc matching 
