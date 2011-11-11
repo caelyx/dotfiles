@@ -46,15 +46,15 @@ endif
 endf 
 inoremap " <c-r>=QuoteDelim('"')<CR>
 inoremap ' <c-r>=QuoteDelim("'")<CR>
-vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
-vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
-vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
-vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
-vnoremap "  <ESC>`>a"<ESC>`<i"<ESC>
-vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
-vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
-vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
-vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
+"vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
+"vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
+"vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
+"vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
+"vnoremap "  <ESC>`>a"<ESC>`<i"<ESC>
+"vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
+"vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
+"vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
+"vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
 function! InAnEmptyPair()
 let cur = strpart(getline('.'),getpos('.')[2]-2,2)
 for pair in (split(&matchpairs,',') + ['":"',"':'"])
