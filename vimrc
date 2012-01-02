@@ -45,7 +45,7 @@ return a:char.a:char."\<Left>"
 endif
 endf 
 inoremap " <c-r>=QuoteDelim('"')<CR>
-inoremap ' <c-r>=QuoteDelim("'")<CR>
+"inoremap ' <c-r>=QuoteDelim("'")<CR>
 "vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
 "vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
 "vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
