@@ -6,6 +6,7 @@ set history=1000
 set hidden
 set guioptions-=rL
 set guifont=Menlo\ Regular:h18
+set nolist
 
 
 " Font bigger/smaller adjustment; only works on OS X
