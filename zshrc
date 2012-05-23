@@ -64,8 +64,11 @@ elif [[ `uname` = 'Linux' ]]; then
     alias ls='ls --color=auto -F';
 fi
 
+alias rake='noglob rake' # Otherwise, Octopress rake commands bzzzt out.
+
 alias -g G=' | egrep '
 alias -g L=' | less '
 alias -g O=' | sort '
 alias cvstat='/usr/bin/cvs status | /bin/grep "Status:"'
 alias cvsmod='/usr/bin/cvs status | /bin/grep "Status:" | /bin/grep -v "Up-to-date"'
+alias katja='mosh -p 9022 katja'
