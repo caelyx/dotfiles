@@ -27,3 +27,7 @@ alias -g L=' | less '
 alias -g O=' | sort '
 alias cvstat='/usr/bin/cvs status | /bin/grep "Status:"'
 alias cvsmod='/usr/bin/cvs status | /bin/grep "Status:" | /bin/grep -v "Up-to-date"'
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
