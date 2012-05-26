@@ -8,7 +8,10 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="caelyx"
 # ZSH_THEME="gallifrey"
-ZSH_THEME="kardan"
+# ZSH_THEME="kardan"
+# ZSH_THEME="nanotech"
+# ZSH_THEME="steeef"
+ZSH_THEME="terminalparty"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -50,13 +53,13 @@ export PYTHONSTARTUP=~/.pythonrc
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-export BAT_CHARGE=/usr/local/bin/batterylevel.py
-function battery_charge {
-    echo `$BAT_CHARGE` 2>/dev/null
-}
+#export BAT_CHARGE=/usr/local/bin/batterylevel.py
+#function battery_charge {
+#    echo `$BAT_CHARGE` 2>/dev/null
+#}
 
-export PS1="%m > "
-RPROMPT='%3~ $(battery_charge)'
+#export PS1="%m > "
+#RPROMPT='%3~ $(battery_charge)'
 
 if [[ `uname` = 'Darwin' ]]; then
     alias ls='ls -G -F';
