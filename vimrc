@@ -6,6 +6,7 @@ set history=1000
 set hidden
 set guioptions-=rL
 set guifont=Menlo\ Regular:h18
+set nolist
 
 
 " Font bigger/smaller adjustment; only works on OS X
@@ -45,7 +46,7 @@ return a:char.a:char."\<Left>"
 endif
 endf 
 inoremap " <c-r>=QuoteDelim('"')<CR>
-inoremap ' <c-r>=QuoteDelim("'")<CR>
+"inoremap ' <c-r>=QuoteDelim("'")<CR>
 "vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
 "vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
 "vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
