@@ -73,3 +73,7 @@ return "\<BS>"
 endif
 endfunc
 inoremap <expr> <BS> DeleteEmptyPairs()
+call pathogen#infect()
+
+autocmd BufNewFile,BufRead *.md,*.textile set filetype=octopress
+
