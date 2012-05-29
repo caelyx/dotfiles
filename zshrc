@@ -8,7 +8,10 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="caelyx"
 # ZSH_THEME="gallifrey"
-ZSH_THEME="kardan"
+# ZSH_THEME="kardan"
+# ZSH_THEME="nanotech"
+# ZSH_THEME="steeef"
+ZSH_THEME="terminalparty"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -50,13 +53,13 @@ export PYTHONSTARTUP=~/.pythonrc
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-export BAT_CHARGE=/usr/local/bin/batterylevel.py
-function battery_charge {
-    echo `$BAT_CHARGE` 2>/dev/null
-}
+#export BAT_CHARGE=/usr/local/bin/batterylevel.py
+#function battery_charge {
+#    echo `$BAT_CHARGE` 2>/dev/null
+#}
 
-export PS1="%m > "
-RPROMPT='%3~ $(battery_charge)'
+#export PS1="%m > "
+#RPROMPT='%3~ $(battery_charge)'
 
 if [[ `uname` = 'Darwin' ]]; then
     alias ls='ls -G -F';
@@ -64,8 +67,11 @@ elif [[ `uname` = 'Linux' ]]; then
     alias ls='ls --color=auto -F';
 fi
 
+alias rake='noglob rake' # Otherwise, Octopress rake commands bzzzt out.
+
 alias -g G=' | egrep '
 alias -g L=' | less '
 alias -g O=' | sort '
 alias cvstat='/usr/bin/cvs status | /bin/grep "Status:"'
 alias cvsmod='/usr/bin/cvs status | /bin/grep "Status:" | /bin/grep -v "Up-to-date"'
+alias katja='mosh -p 9022 katja'
