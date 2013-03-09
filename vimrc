@@ -73,3 +73,12 @@ return "\<BS>"
 endif
 endfunc
 inoremap <expr> <BS> DeleteEmptyPairs()
+
+nnoremap <F3> "=strftime("%FT%T")<CR>P
+inoremap <F3> <C-R>=strftime("%FT%T")<CR>
+set guioptions-=T
+
+""call pathogen#infect()
+
+autocmd BufNewFile,BufRead *.md,*.textile set filetype=octopress
+

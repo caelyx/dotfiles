@@ -9,6 +9,8 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="caelyx"
 # ZSH_THEME="gallifrey"
 # ZSH_THEME="kardan"
+# ZSH_THEME="nanotech"
+# ZSH_THEME="steeef"
 ZSH_THEME="terminalparty"
 
 # Set to this to use case-sensitive completion
@@ -56,7 +58,7 @@ elif [[ `uname` = 'Linux' ]]; then
     alias ls='ls --color=auto -F';
 fi
 
-alias rake='noglob rake' # Otherwise, Octopress rake commands bzzzt out.
+alias rake='nocorrect rake' # Otherwise, Octopress rake commands bzzzt out.
 
 alias -g G=' | egrep '
 alias -g L=' | less '
@@ -67,3 +69,5 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 alias katja='mosh -p 9022 katja'
 alias blogup='rake generate && rake deploy'
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
