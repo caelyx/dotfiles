@@ -5,7 +5,7 @@ let mapleader = ","
 set history=1000
 set hidden
 set guioptions-=rL
-set guifont=Menlo\ Regular:h18
+set guifont=Menlo\ Regular:h14
 set nolist
 
 
