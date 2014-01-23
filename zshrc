@@ -51,15 +51,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/usr/local/git/bin
 export PYTHONSTARTUP=~/.pythonrc
 
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
-#export BAT_CHARGE=/usr/local/bin/batterylevel.py
-#function battery_charge {
-#    echo `$BAT_CHARGE` 2>/dev/null
-#}
-
-#export PS1="%m > "
-#RPROMPT='%3~ $(battery_charge)'
 
 if [[ `uname` = 'Darwin' ]]; then
     alias ls='ls -G -F';
@@ -67,11 +58,16 @@ elif [[ `uname` = 'Linux' ]]; then
     alias ls='ls --color=auto -F';
 fi
 
-alias rake='noglob rake' # Otherwise, Octopress rake commands bzzzt out.
+alias rake='nocorrect rake' # Otherwise, Octopress rake commands bzzzt out.
 
 alias -g G=' | egrep '
 alias -g L=' | less '
 alias -g O=' | sort '
 alias cvstat='/usr/bin/cvs status | /bin/grep "Status:"'
 alias cvsmod='/usr/bin/cvs status | /bin/grep "Status:" | /bin/grep -v "Up-to-date"'
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 alias katja='mosh -p 9022 katja'
+alias blogup='rake generate && rake deploy'
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
