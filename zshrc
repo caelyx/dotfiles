@@ -69,5 +69,9 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 alias katja='mosh -p 9022 katja'
 alias blogup='rake generate && rake deploy'
+alias newpost='find source/_posts -ctime -1 -type f | xargs mvim'
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+
+export MAILDIR=~/Mail/

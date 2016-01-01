@@ -77,6 +77,7 @@ inoremap <expr> <BS> DeleteEmptyPairs()
 nnoremap <F3> "=strftime("%FT%T")<CR>P
 inoremap <F3> <C-R>=strftime("%FT%T")<CR>
 set guioptions-=T
+syn on
 
 ""call pathogen#infect()
 

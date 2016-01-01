@@ -57,19 +57,32 @@ alternates simon@caelyx.net , simon.brown@gmail.com
 
 # GMail specific config courtesy of 
 # http://crunchbanglinux.org/wiki/howto/howto_setup_mutt_with_gmail_imap
-source ~/.dotfiles/muttrc.authentication
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set postponed ="+[Gmail]/Drafts"
+# source ~/.dotfiles/muttrc.authentication
+# set folder = "imaps://imap.gmail.com:993"
+# set spoolfile = "+INBOX"
+# set postponed ="+[Gmail]/Drafts"
 set header_cache =~/.mutt/cache/headers
 set message_cachedir =~/.mutt/cache/bodies
 set certificate_file =~/.mutt/certificates
-bind editor <space> noop
-macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-macro index gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent Mail"
-macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+# bind editor <space> noop
+# macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+# macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+# macro index gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent Mail"
+# macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 set move = no  #Stop asking to "move read messages to mbox"!
 set imap_keepalive = 900
 set editor='vim + -c "set textwidth=72" -c "set wrap" -c "set nocp" -c "?^$"'
 
+
+set mbox_type=Maildir
+set folder="~/Mail"
+set mbox="~/Mail"
+set record="+.Sent"
+set postponed="+.Drafts"
+set spoolfile="~/Mail"
+
+# mutt macros for mu
+macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Mail/search " "mu find"
+macro index <F9> "<change-folder-readonly>~/Mail/search" "mu find results"
+
+auto_view text/html
