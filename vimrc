@@ -1,18 +1,37 @@
-" Yet another .vimrc, this one by Simon Brown (caelyx) <projects@caelyx.net>
+" To use as-is, you will need:
+" NERDtree file explorer - https://github.com/scrooloose/nerdtree
+" Vividchalk colour theme - https://github.com/tpope/vim-vividchalk
+" VimWiki - https://github.com/vimwiki/vimwiki.git 
 
-color molokai
+execute pathogen#infect()
+
+colo vividchalk
+
+syntax on 
+filetype plugin indent on
+
 let mapleader = ","
+
+set laststatus=2 " Always show status line
+set wrap " Wrap unless told not to - I mostly write text now
+set lbr " Break in sensible places, not mid-word
+set nu "Turn on line numbering
+
 set history=1000
 set hidden
-set guioptions-=rL
+set guioptions-=rLT
 set guifont=Menlo\ Regular:h14
-set nolist
 
+noremap <Leader>n :NERDTreeToggle<CR>
+noremap <Leader>m :!open -a Marked\ 2 %<CR>
 
 " Font bigger/smaller adjustment; only works on OS X
 nmap <F12>   :macaction fontSizeUp:<CR>
 nmap <S-F12> :macaction fontSizeDown:<CR>
 
+" Timestamps
+nnoremap <F3> "=strftime("%FT%T")<CR>P
+inoremap <F3> <C-R>=strftime("%FT%T")<CR>
 
 " TextMate style parenthesis, etc matching 
 " From http://concisionandconcinnity.blogspot.com/2009/07/vim-part-ii-matching-pairs.html
@@ -20,66 +39,8 @@ nmap <S-F12> :macaction fontSizeDown:<CR>
 inoremap ( ()<Left>
 inoremap [ []<Left>
 inoremap { {}<Left>
+inoremap " ""<Left>
 autocmd Syntax html,vim inoremap < <lt>><Left>
-function! ClosePair(char)
-  if getline('.')[col('.') - 1] == a:char
-    return "\<Right>"
-  else
-    return a:char
-  endif
-endf
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap } <c-r>=ClosePair('}')<CR>
-function! QuoteDelim(char)
-let line = getline('.')
-let col = col('.')
-if line[col - 2] == "\\"
-"Inserting a quoted quotation mark into the string
-return a:char
-elseif line[col - 1] == a:char
-"Escaping out of the string
-return "\<Right>"
-else
-"Starting a string
-return a:char.a:char."\<Left>"
-endif
-endf 
-inoremap " <c-r>=QuoteDelim('"')<CR>
-"inoremap ' <c-r>=QuoteDelim("'")<CR>
-"vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
-"vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
-"vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
-"vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
-"vnoremap "  <ESC>`>a"<ESC>`<i"<ESC>
-"vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
-"vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
-"vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
-"vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
-function! InAnEmptyPair()
-let cur = strpart(getline('.'),getpos('.')[2]-2,2)
-for pair in (split(&matchpairs,',') + ['":"',"':'"])
-if cur == join(split(pair,':'),'')
-return 1
-endif
-endfor
-return 0
-endfunc
-func! DeleteEmptyPairs()
-if InAnEmptyPair()
-return "\<Left>\<Del>\<Del>"
-else
-return "\<BS>"
-endif
-endfunc
-inoremap <expr> <BS> DeleteEmptyPairs()
 
-nnoremap <F3> "=strftime("%FT%T")<CR>P
-inoremap <F3> <C-R>=strftime("%FT%T")<CR>
-set guioptions-=T
-syn on
-
-""call pathogen#infect()
-
-autocmd BufNewFile,BufRead *.md,*.textile set filetype=octopress
-
+" Tell VimWiki where to find content, and to use markdown
+let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
