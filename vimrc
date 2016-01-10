@@ -1,3 +1,8 @@
+" To use as-is, you will need:
+" NERDtree file explorer - https://github.com/scrooloose/nerdtree
+" Vividchalk colour theme - https://github.com/tpope/vim-vividchalk
+" VimWiki - https://github.com/vimwiki/vimwiki.git 
+
 execute pathogen#infect()
 
 colo vividchalk
