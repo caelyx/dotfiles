@@ -62,39 +62,12 @@ send-hook address@yahoo\.com unset pgp_autosign
 send-hook 'address@excite.com' unset pgp_autosign
 #[end 1]
 
-color status black white
-color indicator default blue
-color normal white default
-color attachment brightyellow default
-color hdrdefault cyan default
-color markers brightred default
-color quoted    green default
-color signature cyan default
-color tilde     blue default
-color tree      red default
-color body     brightred default [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
-color body     brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
-
-color quoted1 brightyellow default
-color quoted2 red default
-color hdrdefault cyan default
-color header   brightred default ^Subject:
-color header   brightgreen default ^From:
-color signature cyan default
-
-color index green default ~p  # To me
-color index brightyellow default ~N  # New
-
-color index blue default ~T # Tagged
-color index red default ~D # Deleted
-
-
+source ~/.dotfiles/muttrc.color
 
 set header_cache =~/.mutt/cache/headers
 set message_cachedir =~/.mutt/cache/bodies
 set certificate_file =~/.mutt/certificates
 bind editor <space> noop
-#macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 set move = no  #Stop asking to "move read messages to mbox"!
 #set imap_keepalive = 900
 set editor='vim + -c "set textwidth=72" -c "set wrap" -c "set nocp" -c "?^$"'
@@ -137,3 +110,4 @@ set pgp_timeout=1800
 set pgp_good_sign="^gpg: Good signature from"
 set pgp_auto_decode=yes
 
+auto_view text/html
