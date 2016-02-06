@@ -1,17 +1,56 @@
-set move=no
-set mbox_type=Maildir
-set edit_headers=yes
+source ~/.dotfiles/muttrc.authentication
 
-set pager_index_lines=6
 
-set pgp_timeout=3600
+# This is who we are
+alternates simon@caelyx.net , simon.brown@gmail.com , caelyx@sent.com , simon@bearlosestofu.net
+set from=$my_user
+set realname="Simon"
 
-set mark_old = yes
+set my_server="mail.messagingengine.com"
+set imap_user=$my_user
+set imap_pass=$my_pass
 
-#[start 1] following lines from http://www.bolverk.net/muttrc.html
-set from="simon.brown@gmail.com"
-set realname="Simon Brown"
-my_hdr X-Conspiracy: There is no PSU
+set my_smtp_server="mail.messagingengine.com"
+set smtp_url = "smtp://$my_user:$my_pass@$my_server:587"
+set smtp_pass = $my_pass
+
+set folder=imaps://$my_server/INBOX
+set spoolfile="="
+
+# Mailboxes
+set folder = "imaps://$my_server:992"
+set spoolfile = "="
+set record = "=Sent Items"
+set postponed = "=Drafts"
+#set trash = "=Trash"
+mailboxes = "="
+
+# Cache
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+# # Options
+set index_format = "%3C %Z %[%b %d %R] %-18.18L (%4c) %s"
+set imap_idle=yes
+unset imap_passive
+#set timeout=15
+#set mail_check = 5
+set imap_keepalive = 900
+set sort = threads
+set sort_browser=date
+set sort_aux=reverse-last-date-received
+set editor = "emacs +8 %s"
+set pager_index_lines = 10
+set pager_context = 5
+unset markers
+set delete=yes
+set noconfirmappend
+set edit_headers
+unset mark_old
+set pager_stop
+set strict_threads = yes
+
 set postpone=ask-no
 #don't sign stuff to these people
 #webmail accounts
@@ -50,26 +89,51 @@ color index blue default ~T # Tagged
 color index red default ~D # Deleted
 
 
-# This is who we are
-alternates simon@caelyx.net , simon.brown@gmail.com
 
-
-
-# GMail specific config courtesy of 
-# http://crunchbanglinux.org/wiki/howto/howto_setup_mutt_with_gmail_imap
-source ~/.dotfiles/muttrc.authentication
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set postponed ="+[Gmail]/Drafts"
 set header_cache =~/.mutt/cache/headers
 set message_cachedir =~/.mutt/cache/bodies
 set certificate_file =~/.mutt/certificates
 bind editor <space> noop
-macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-macro index gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent Mail"
-macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+#macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 set move = no  #Stop asking to "move read messages to mbox"!
-set imap_keepalive = 900
+#set imap_keepalive = 900
 set editor='vim + -c "set textwidth=72" -c "set wrap" -c "set nocp" -c "?^$"'
+set move=no
+set mbox_type=Maildir
+set edit_headers=yes
+
+set pager_index_lines=6
+
+set pgp_timeout=3600
+
+set mark_old = yes
+
+
+#set record="=Sent Items"
+#set postponed="=Drafts"
+#macro index,pager ,a <save-message>=Archive\n
+
+#set pgp_use_gpg_agent=yes
+
+
+# GPG bindings from https://raw.githubusercontent.com/vdanen/mutt-scripts/master/mutt/gpg.rc
+
+set pgp_decode_command="/usr/local/bin/gpg --no-verbose --batch --output - %f"
+set pgp_verify_command="/usr/local/bin/gpg --no-verbose --batch --output - --verify %s %f"
+set pgp_decrypt_command="/usr/local/bin/gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
+set pgp_sign_command="/usr/local/bin/gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_clearsign_command="/usr/local/bin/gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x3CB209F0 -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x3CB209F0 -- -r %r -- %f"
+set pgp_import_command="/usr/local/bin/gpg --no-verbose --import -v %f"
+set pgp_export_command="/usr/local/bin/gpg --no-verbose --export --armor %r"
+set pgp_verify_key_command="/usr/local/bin/gpg --no-verbose --batch --fingerprint --check-sigs %r"
+set pgp_list_pubring_command="/usr/local/bin/gpg --no-verbose --batch --with-colons --list-keys %r" 
+set pgp_list_secring_command="/usr/local/bin/gpg --no-verbose --batch --with-colons --list-secret-keys %r" 
+#set pgp_autosign=yes
+set pgp_sign_as=0x3CB209F0
+set pgp_replyencrypt=yes
+set pgp_timeout=1800
+set pgp_good_sign="^gpg: Good signature from"
+set pgp_auto_decode=yes
 

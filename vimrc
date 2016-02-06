@@ -1,13 +1,17 @@
 " To use as-is, you will need:
 " NERDtree file explorer - https://github.com/scrooloose/nerdtree
 " Vividchalk colour theme - https://github.com/tpope/vim-vividchalk
-" VimWiki - https://github.com/vimwiki/vimwiki.git 
+" VimWiki - https://github.com/vimwiki/vimwiki
+" GnuPG - https://github.com/jamessan/vim-gnupg
+" Airline - https://github.com/vim-airline/vim-airline
+" Jekyll plugin - https://github.com/parkr/vim-jekyll
 
 execute pathogen#infect()
 
+syntax on 
+set background=dark
 colo vividchalk
 
-syntax on 
 filetype plugin indent on
 
 let mapleader = ","
@@ -33,15 +37,12 @@ nmap <S-F12> :macaction fontSizeDown:<CR>
 nnoremap <F3> "=strftime("%FT%T")<CR>P
 inoremap <F3> <C-R>=strftime("%FT%T")<CR>
 
-" TextMate style parenthesis, etc matching 
-" From http://concisionandconcinnity.blogspot.com/2009/07/vim-part-ii-matching-pairs.html
-
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
-inoremap " ""<Left>
-autocmd Syntax html,vim inoremap < <lt>><Left>
-
-
 " Tell VimWiki where to find content, and to use markdown
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
+
+" Configure the gnupg plugin
+let g:GPGPreferArmor=1
+let g:GPGDefaultRecipients=["simon@brown.direct"]
+
+" Jekyll plugin configuration
+let g:jekyll_post_extension = '.md'
