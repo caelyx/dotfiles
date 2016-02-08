@@ -36,11 +36,7 @@ inoremap <F3> <C-R>=strftime("%FT%T")<CR>
 " TextMate style parenthesis, etc matching 
 " From http://concisionandconcinnity.blogspot.com/2009/07/vim-part-ii-matching-pairs.html
 
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
-inoremap " ""<Left>
-autocmd Syntax html,vim inoremap < <lt>><Left>
+inoremap ,[ [ ] 
 
 " Tell VimWiki where to find content, and to use markdown
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
