@@ -1,5 +1,5 @@
-export RPROMPT='%2~'
-export PROMPT='%n@%m%% '
+export RPROMPT='%2~ %m'
+export PROMPT='%n %% '
 
 export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:$PATH
 export PYTHONSTARTUP=~/.pythonrc
