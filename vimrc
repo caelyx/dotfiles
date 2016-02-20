@@ -42,6 +42,8 @@ nmap <S-F12> :macaction fontSizeDown:<CR>
 nnoremap <F3> "=strftime("%FT%T")<CR>P
 inoremap <F3> <C-R>=strftime("%FT%T")<CR>
 
+inoremap ,[ [ ] 
+
 " Tell VimWiki where to find content, and to use markdown
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
 
