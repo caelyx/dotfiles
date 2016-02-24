@@ -17,9 +17,16 @@ filetype plugin indent on
 let mapleader = ","
 
 set laststatus=2 " Always show status line
+
 set nowrap 
 set lbr " Break in sensible places, not mid-word
+
 set nu "Turn on line numbering
+set rnu " Relative line numbering is a delight
+
+"http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
+nnoremap <silent><leader>r :set relativenumber!<cr> 
+
 
 " Activate wrapping and spell check for text files
 autocmd BufNewFile,BufRead *.txt,*.md set wrap
@@ -54,6 +61,11 @@ let g:GPGDefaultRecipients=["simon@brown.direct"]
 " Jekyll plugin configuration
 let g:jekyll_post_extension = '.md'
 
+" Text mode pedantry
+set sw=4      " Shift-width is half a tab
+set ts=8      " This is the default, but be explicit
+set expandtab " Use spaces not tab characters
+
 
 " Content from Damian Conway http://is.gn/IBV2013
 "====[ Improved search behaviour ]====================
@@ -76,3 +88,4 @@ noremap <Leader>h :nohls<CR>
         autocmd SwapExists * sleep 2
     augroup END
 " END content from DC.
+
