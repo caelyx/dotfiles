@@ -17,12 +17,24 @@ filetype plugin indent on
 let mapleader = ","
 
 set laststatus=2 " Always show status line
-set wrap " Wrap unless told not to - I mostly write text now
+
+set nowrap 
 set lbr " Break in sensible places, not mid-word
+
 set nu "Turn on line numbering
+set rnu " Relative line numbering is a delight
+
+"http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
+nnoremap <silent><leader>r :set relativenumber!<cr> 
+
+
+" Activate wrapping and spell check for text files
+autocmd BufNewFile,BufRead *.txt,*.md set wrap
+autocmd BufNewFile,BufRead *.txt,*.md setlocal spell spelllang=en_au
 
 set history=1000
 set hidden
+
 set guioptions-=rLT
 set guifont=Menlo\ Regular:h14
 
@@ -48,3 +60,32 @@ let g:GPGDefaultRecipients=["simon@brown.direct"]
 
 " Jekyll plugin configuration
 let g:jekyll_post_extension = '.md'
+
+" Text mode pedantry
+set sw=4      " Shift-width is half a tab
+set ts=8      " This is the default, but be explicit
+set expandtab " Use spaces not tab characters
+
+
+" Content from Damian Conway http://is.gn/IBV2013
+"====[ Improved search behaviour ]====================
+set incsearch       "Lookahead as search pattern is specified
+set ignorecase      "Ignore case in all searches...
+set smartcase       "...unless uppercase letters used
+set hlsearch        "Highlight all matches
+
+" But match highlighting drives Simon mad
+noremap <Leader>h :nohls<CR> 
+"====[ Swap : and ; to make colon commands easier to type ]======
+    nnoremap  ;  : 
+"====[ Open any file with a pre-existing swapfile in readonly mode "]=========
+    augroup NoSimultaneousEdits
+        autocmd!
+        autocmd SwapExists * let v:swapchoice = 'o'
+        autocmd SwapExists * echomsg ErrorMsg
+        autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+        autocmd SwapExists * echohl None
+        autocmd SwapExists * sleep 2
+    augroup END
+" END content from DC.
+
