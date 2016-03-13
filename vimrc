@@ -27,10 +27,18 @@ set rnu " Relative line numbering is a delight
 "http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
 nnoremap <silent><leader>r :set relativenumber!<cr> 
 
+" Airline configuration
+let g:airline_section_y      =''
+let g:airline_section_warning=''
+"AirlineToggleWhitespace
 
-" Activate wrapping and spell check for text files
-autocmd BufNewFile,BufRead *.txt,*.md set wrap
-autocmd BufNewFile,BufRead *.txt,*.md setlocal spell spelllang=en_au
+augroup filetype_txt
+    " Activate wrapping and spell check for text files
+    autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap
+    autocmd BufNewFile,BufRead *.txt,*.md setlocal spell spelllang=en_au
+    " Automatically write text files on Cmd-Tab or equiv
+    autocmd FocusLost *.txt,*.md :write
+augroup END
 
 set history=1000
 set hidden
@@ -41,13 +49,19 @@ set guifont=Menlo\ Regular:h14
 noremap <Leader>n :NERDTreeToggle<CR>
 noremap <Leader>m :!open -a Marked\ 2 %<CR>
 
+" @bob_koss https://twitter.com/bob_koss/status/254230953835253760
+nnoremap <leader><leader> <c-^>
+
+" Yank selection to system clipboard https://twitter.com/dotvimrc/status/179570915749797888
+vnoremap Y "*y
+
 " Font bigger/smaller adjustment; only works on OS X
 nmap <F12>   :macaction fontSizeUp:<CR>
 nmap <S-F12> :macaction fontSizeDown:<CR>
 
 " Timestamps
-nnoremap <F3> "=strftime("%FT%T")<CR>P
-inoremap <F3> <C-R>=strftime("%FT%T")<CR>
+nnoremap <F3> "=strftime("%F")<CR>P
+inoremap <F3> <C-R>=strftime("%F")<CR>
 
 inoremap ,[ [ ] 
 
@@ -89,3 +103,10 @@ noremap <Leader>h :nohls<CR>
     augroup END
 " END content from DC.
 
+" Learn Vimscript the Hard Way http://learnvimscriptthehardway.stevelosh.com/
+inoremap jk <esc> 
+nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>vs :source $MYVIMRC<cr>
+
+iabbrev @@    simon@bearlosestofu.net
+iabbrev zsig    --<cr>Simon Brown<cr>simon@bearlosestofu.net<cr>5A53 7D24 711F 8AA2 6366  242B 1F3F 596C 3CB2 09F0
