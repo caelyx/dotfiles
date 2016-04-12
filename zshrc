@@ -1,5 +1,5 @@
 export RPROMPT='%2~ %m'
-export PROMPT='%n %% '
+export PROMPT='%m%% '
 
 export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:$PATH
 export PYTHONSTARTUP=~/.pythonrc
@@ -15,13 +15,12 @@ fi
 alias -g G=' | egrep '
 alias -g L=' | less '
 alias -g O=' | sort '
-
 alias pbfix pbpaste | pbcopy # Usefully forces plaintext
+alias katja='mosh -p 9022 katja'
 
-alias katja='mosh -p 9022 katja' 
+# On OS X, display a notification centre notification
+alias notifyDone="osascript -e 'display notification \"Task complete\" with title \"Done\"'"
 
-alias blogup='rake generate && rake deploy'
-alias rake='nocorrect rake' # Otherwise, Octopress rake commands bzzzt out.
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 setopt menucomplete # Show the list of possible completions
