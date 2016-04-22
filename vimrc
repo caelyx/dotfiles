@@ -84,7 +84,7 @@ augroup filetype_txt
     autocmd FocusLost *.txt,*.md :write
     " Mark task done ('[ ] ' -> '[x] ') and move to the bottom of the file.
     " Overwrites mark 'a'
-    autocmd BufNewFile,BufRead *.txt,*.md nnoremap <leader>x :<c-u>normal! jmak0lrxddGp`a<cr>
+    autocmd BufNewFile,BufRead *.txt,*.md nnoremap <leader>x :<c-u>normal! k0majlrxddGp`aj<cr>
 augroup END "}}}
 
 " Tell VimWiki where to find content, and to use markdown
