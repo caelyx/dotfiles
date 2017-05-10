@@ -6,19 +6,19 @@ alternates simon@caelyx.net , simon.brown@gmail.com , caelyx@sent.com , simon@be
 set from=$my_user
 set realname="Simon"
 
-set my_server="mail.messagingengine.com"
+set my_server="imap.fastmail.com"
 set imap_user=$my_user
 set imap_pass=$my_pass
 
-set my_smtp_server="mail.messagingengine.com"
-set smtp_url = "smtp://$my_user:$my_pass@$my_server:587"
+set my_smtp_server="smtp.fastmail.com"
+set smtp_url = "smtp://$my_user:$my_pass@$my_server:465"
 set smtp_pass = $my_pass
 
 set folder=imaps://$my_server/INBOX
 set spoolfile="="
 
 # Mailboxes
-set folder = "imaps://$my_server:992"
+set folder = "imaps://$my_server:993"
 set spoolfile = "="
 set record = "=Sent Items"
 set postponed = "=Drafts"
