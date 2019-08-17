@@ -14,6 +14,9 @@ colo vividchalk
 
 filetype plugin indent on
 
+"activate omni completion
+set omnifunc=syntaxcomplete#Complete
+
 let mapleader = ","
 
 set laststatus=2 " Always show status line
@@ -67,6 +70,9 @@ inoremap ,[ [ ]
 
 " Tell VimWiki where to find content, and to use markdown
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
+
+" Todo list mapping
+nnoremap <Leader>tt <Plug>VimwikiToggleListItem
 
 " Configure the gnupg plugin
 let g:GPGPreferArmor=1
