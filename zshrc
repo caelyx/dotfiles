@@ -2,7 +2,7 @@ export RPROMPT='%2~ %m'
 export PROMPT='%n %% '
 
 export EDITOR=`which vim` # vi as vim breaks git somewhat
-export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:$PATH
+export PATH=/usr/local/Cellar/ruby@2.5/2.5.5/bin:/usr/local/lib/ruby/gems/2.5.0/bin:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export PYTHONSTARTUP=~/.pythonrc
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
