@@ -26,3 +26,11 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 setopt menucomplete # Show the list of possible completions
 setopt autolist
 setopt nolistbeep # Don't ring the bell when match is ambiguous
+
+alias d20="qrandom --int --min 1 --max 20" 
+alias d12="qrandom --int --min 1 --max 12" 
+alias d10="qrandom --int --min 1 --max 10" 
+
+if [ -f ~/.dotfiles/zshrc.authentication ]; then
+    source ~/.dotfiles/zshrc.authentication
+fi
