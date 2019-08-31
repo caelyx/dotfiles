@@ -1,5 +1,5 @@
 export RPROMPT='%2~ %m'
-export PROMPT='%m%% '
+export PROMPT='%n%% '
 
 export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export EDITOR=`which vim` # vi as vim breaks git somewhat
