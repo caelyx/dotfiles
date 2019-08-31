@@ -2,6 +2,7 @@ export RPROMPT='%2~ %m'
 export PROMPT='%m%% '
 
 export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
+export EDITOR=`which vim` # vi as vim breaks git somewhat
 export PYTHONSTARTUP=~/.pythonrc
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -23,9 +24,9 @@ alias notifyDone="osascript -e 'display notification \"Task complete\" with titl
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-setopt menucomplete # Show the list of possible completions
+setopt nomenucomplete # Show the list of possible completions
 setopt autolist
-setopt nolistbeep # Don't ring the bell when match is ambiguous
+setopt nolistbeep # Dont ring the bell when match is ambiguous
 
 alias d20="qrandom --int --min 1 --max 20" 
 alias d12="qrandom --int --min 1 --max 12" 
