@@ -51,8 +51,15 @@ set guifont=Menlo\ Regular:h14
 nnoremap <silent><leader>r :set relativenumber!<cr> 
 nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>m :!open -a Marked\ 2 %<CR>
+nnoremap <Leader>d :!open -a Deckset %<CR>
 " @bob_koss https://twitter.com/bob_koss/status/254230953835253760
 nnoremap <leader><leader> <c-^>
+" Underline a headline in Markdown
+nnoremap <leader>= yyp0v$r=
+nnoremap <leader>- yyp0v$r-
+
+" Move to next buffer
+nnoremap <Leader>b :bn<CR>
 
 " Yank selection to system clipboard https://twitter.com/dotvimrc/status/179570915749797888
 vnoremap Y "*y
@@ -72,6 +79,7 @@ inoremap ,[ [ ]
 " Airline configuration {{{
 let g:airline_section_y      =''
 let g:airline_section_warning=''
+let g:airline#extensions#tabline#enabled = 1
 "AirlineToggleWhitespace
 "}}}
 
