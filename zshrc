@@ -36,6 +36,8 @@ alias d20="qrandom --int --min 1 --max 20"
 alias d12="qrandom --int --min 1 --max 12" 
 alias d10="qrandom --int --min 1 --max 10" 
 
+export GPG_TTY=$(tty)
+
 if [ -f ~/.dotfiles/zshrc.local ]; then
     source ~/.dotfiles/zshrc.local
 fi
