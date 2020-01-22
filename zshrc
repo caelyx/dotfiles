@@ -17,6 +17,7 @@ alias -g L=' | less '
 alias -g O=' | sort '
 alias pbfix pbpaste | pbcopy # Usefully forces plaintext
 alias katja='mosh -p 9022 katja'
+alias today='date "+%F"'
 
 xw () {  # Crossword solver; % xw m.nk.y 
     grep -i "^$1$" /usr/share/dict/words 
