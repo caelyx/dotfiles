@@ -44,9 +44,6 @@ set hlsearch        " Highlight all matches
 
 set history=1000
 set hidden
-
-set guioptions-=rLT
-set guifont=Menlo\ Regular:h14
 " }}}
 
 " Key mappings {{{
@@ -66,10 +63,6 @@ nnoremap <Leader>b :bn<CR>
 
 " Yank selection to system clipboard https://twitter.com/dotvimrc/status/179570915749797888
 vnoremap Y "*y
-
-" Font bigger/smaller adjustment; only works on OS X
-nmap <F12>   :macaction fontSizeUp:<CR>
-nmap <S-F12> :macaction fontSizeDown:<CR>
 
 " Timestamps
 nnoremap <F3> "=strftime("%F")<CR>P
