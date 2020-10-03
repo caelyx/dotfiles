@@ -15,11 +15,44 @@ fi
 alias -g G=' | egrep '
 alias -g L=' | less '
 alias -g O=' | sort '
-alias pbfix pbpaste | pbcopy # Usefully forces plaintext
+alias pbfix='pbpaste | pbcopy' # Usefully forces plaintext
 alias katja='mosh -p 9022 katja'
+alias today="date '+%F'"
 
 xw () {  # Crossword solver; % xw m.nk.y 
     grep -i "^$1$" /usr/share/dict/words 
+}
+
+topo () { # Create a 200x290 map at 1:25,000 centred at $x, $y
+    nswtopo init -d 200,290 -c $2,$1 map.tgz; 
+    nswtopo add map.tgz nsw/reference-topo-current;
+    nswtopo grid map.tgz;
+    nswtopo declination map.tgz;
+    nswtopo render map.tgz pdf;
+    open map.pdf
+
+}
+
+topo_init () { # Create a 200x290 map at 1:25,000 centred at $x, $y
+    nswtopo init -d 200,290 -c $2,$1 map.tgz; 
+}
+
+topo_render () { # Render the topographic basemap of the file
+    nswtopo add map.tgz nsw/topographic;
+    nswtopo grid map.tgz;
+    nswtopo declination map.tgz;
+    nswtopo render map.tgz pdf;
+    open map.pdf
+
+}
+
+topo_ref () { # Render the standard-issue reference basemap of the file
+    nswtopo add map.tgz nsw/reference-topo-current;
+    nswtopo grid map.tgz;
+    nswtopo declination map.tgz;
+    nswtopo render map.tgz pdf;
+    open map.pdf
+
 }
 
 # On OS X, display a notification centre notification
