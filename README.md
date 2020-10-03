@@ -1,7 +1,7 @@
 # dotfiles
 These are my dotfiles. They are moderately opinionated, but I try to avoid too much customisation.  This tends to be the first repository I pull down on a new machine. 
 
-``` 
+```zsh 
 cd ~
 git clone https://github.com/caelyx/dotfiles.git .dotfiles
 cd .dotfiles

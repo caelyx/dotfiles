@@ -1,5 +1,5 @@
 export RPROMPT='%2~ %m'
-export PROMPT='%m%% '
+export PROMPT='%n%% '
 
 export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export EDITOR=`which vim` 
@@ -17,7 +17,7 @@ alias -g L=' | less '
 alias -g O=' | sort '
 alias pbfix='pbpaste | pbcopy' # Usefully forces plaintext
 alias katja='mosh -p 9022 katja'
-alias today="date '+%F'"
+alias today='date "+%F"'
 
 xw () {  # Crossword solver; % xw m.nk.y 
     grep -i "^$1$" /usr/share/dict/words 
