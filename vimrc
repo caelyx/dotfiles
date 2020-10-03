@@ -24,10 +24,10 @@ let mapleader = ","
 set laststatus=2 " Always show status line
 
 set nowrap 
-set lbr " Break in sensible places, not mid-word
+set lbr " When we break, do it in sensible places, not mid-word
 
-set nu "Turn on line numbering
-set rnu " Relative line numbering is a delight
+set nu  " Always on line numbering
+set rnu " Relative line numbering 
 
 " Text mode pedantry
 set shiftwidth=4      " Shift-width is half a tab
@@ -74,6 +74,8 @@ nmap <S-F12> :macaction fontSizeDown:<CR>
 " Timestamps
 nnoremap <F3> "=strftime("%F")<CR>P
 inoremap <F3> <C-R>=strftime("%F")<CR>
+nnoremap <F4> "=strftime("%H:%M")<CR>P
+inoremap <F4> <C-R>=strftime("%H:%M")<CR>
 
 inoremap ,[ [ ] 
 
@@ -102,16 +104,16 @@ augroup END "}}}
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " Todo list mapping
-nnoremap <Leader>tt <Plug>VimwikiToggleListItem
+nnoremap <Leader>tt :VimwikiToggleListItem<CR>
 
 " Configure the gnupg plugin
 let g:GPGPreferArmor=1
-let g:GPGDefaultRecipients=["simon@brown.direct"]
+let g:GPGDefaultRecipients=["s@sbrown.io"]
 
 " Jekyll plugin configuration
 let g:jekyll_post_extension = '.md'
 
-" But match highlighting drives Simon mad
+" Disable match highlighting 
 noremap <Leader>h :nohls<CR> 
 
 "====[ Swap : and ; to make colon commands easier to type ]======
@@ -137,6 +139,6 @@ nnoremap <leader>vs :source $MYVIMRC<cr>
 " cin( changes content inside next set of ()
 onoremap in( :<c-u>normal! f(vi(<cr>
 
-iabbrev @@    simon@bearlosestofu.net
-iabbrev zsig    --<cr>Simon Brown<cr>simon@bearlosestofu.net<cr>5A53 7D24 711F 8AA2 6366  242B 1F3F 596C 3CB2 09F0
+iabbrev @@    s@sbrown.io
+iabbrev zsig    --<cr>Simon Brown<cr>s@sbrown.io<cr>5A53 7D24 711F 8AA2 6366  242B 1F3F 596C 3CB2 09F0
 iabbrev THe     The
