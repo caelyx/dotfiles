@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-LOC="~/.vim/bundle"
+LOC="$HOME/.vim/bundle"
 GIT=/usr/local/bin/hub
 
 mkdir -p $LOC
