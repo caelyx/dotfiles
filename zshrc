@@ -1,5 +1,8 @@
-export RPROMPT='%2~ %m'
-export PROMPT='%n%% '
+autoload colors
+colors
+
+export RPROMPT='%n@%m'
+export PROMPT="%2~ %{%(#~$fg[red]~$fg[blue])%}%#%{$fg[default]%} "
 
 export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export EDITOR=`which vim` 
@@ -68,6 +71,8 @@ setopt nolistbeep # Dont ring the bell when match is ambiguous
 alias d20="qrandom --int --min 1 --max 20" 
 alias d12="qrandom --int --min 1 --max 12" 
 alias d10="qrandom --int --min 1 --max 10" 
+
+alias efix="head -1 ~/notes/EmailCleanUp.md | pbcopy"
 
 export GPG_TTY=$(tty)
 
