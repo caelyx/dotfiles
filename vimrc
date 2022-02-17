@@ -50,8 +50,8 @@ set hidden
 "http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
 nnoremap <silent><leader>r :set relativenumber!<cr> 
 nnoremap <Leader>n :NERDTreeToggle<CR>
-nnoremap <Leader>m :!open -a Marked\ 2 %<CR>
-nnoremap <Leader>d :!open -a Deckset %<CR>
+nnoremap <Leader>m :!open -a Marked\ 2 "%"<CR>
+nnoremap <Leader>d :!open -a Deckset "%"<CR>
 " @bob_koss https://twitter.com/bob_koss/status/254230953835253760
 nnoremap <leader><leader> <c-^>
 " Underline a headline in Markdown
@@ -67,8 +67,10 @@ vnoremap Y "*y
 " Timestamps
 nnoremap <F3> "=strftime("%F")<CR>P
 inoremap <F3> <C-R>=strftime("%F")<CR>
+inoremap <Leader>r <C-R>=strftime("%F")<CR>
 nnoremap <F4> "=strftime("%H:%M")<CR>P
 inoremap <F4> <C-R>=strftime("%H:%M")<CR>
+inoremap <Leader>t <C-R>=strftime("%H:%M")<CR>
 
 inoremap ,[ [ ] 
 

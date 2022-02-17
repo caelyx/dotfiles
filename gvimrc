@@ -1,7 +1,7 @@
 
 set guioptions-=rLT
 "set guifont=Menlo\ Regular:h14
-set guifont=Fira\ Code:h14
+set guifont=Fira\ Code:h16
 set macligatures
 
 " Font bigger/smaller adjustment; only works on OS X
