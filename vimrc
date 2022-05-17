@@ -50,8 +50,8 @@ set hidden
 "http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
 nnoremap <silent><leader>r :set relativenumber!<cr> 
 nnoremap <Leader>n :NERDTreeToggle<CR>
-nnoremap <Leader>m :!open -a Marked\ 2 %<CR>
-nnoremap <Leader>d :!open -a Deckset %<CR>
+nnoremap <Leader>m :!open -a Marked\ 2 "%"<CR>
+nnoremap <Leader>d :!open -a Deckset "%"<CR>
 " @bob_koss https://twitter.com/bob_koss/status/254230953835253760
 nnoremap <leader><leader> <c-^>
 " Underline a headline in Markdown
