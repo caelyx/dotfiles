@@ -67,10 +67,12 @@ vnoremap Y "*y
 " Timestamps
 nnoremap <F3> "=strftime("%F")<CR>P
 inoremap <F3> <C-R>=strftime("%F")<CR>
+inoremap <leader>r <C-R>=strftime("%F")<CR>
 nnoremap <F4> "=strftime("%H:%M")<CR>P
 inoremap <F4> <C-R>=strftime("%H:%M")<CR>
+inoremap <leader>t <C-R>=strftime("%H:%M")<CR>
 
-inoremap ,[ [ ] 
+inoremap ,[ * [ ] 
 
 " }}}
 
