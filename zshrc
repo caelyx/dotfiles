@@ -27,9 +27,13 @@ xw () {  # Crossword solver; % xw m.nk.y
     grep -i "^$1$" /usr/share/dict/words 
 }
 
+# wrdl () {  # Wordle solver; % xw .r.t. ie zxvy
+#     grep -i "^$1$" /Users/caelyx/src/wordle-solver/wordlist.txt | grep -i "[$2]" | grep -vi "[$3]"
+# }
+
 topo () { # Create a 200x290 map at 1:25,000 centred at $x, $y
     nswtopo init -d 200,290 -c $2,$1 map.tgz; 
-    nswtopo add map.tgz nsw/reference-topo-current;
+    nswtopo add map.tgz nsw/topographic
     nswtopo grid map.tgz;
     nswtopo declination map.tgz;
     nswtopo render map.tgz pdf;
@@ -74,6 +78,8 @@ alias d12="qrandom --int --min 1 --max 12"
 alias d10="qrandom --int --min 1 --max 10" 
 
 alias efix="head -1 ~/notes/EmailCleanUp.md | pbcopy"
+
+alias newsradio="mpg321 http://live-radio01.mediahubaustralia.com/PBW/mp3/ http://live-radio02.mediahubaustralia.com/PBW/mp3/"
 
 export GPG_TTY=$(tty)
 
