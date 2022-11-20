@@ -15,9 +15,9 @@ export LC_ALL=en_US.UTF-8
 export GPG_TTY=$(tty)
 
 # Python virtual environment helper functions
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/src
-source /usr/local/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/src
+#source /usr/local/bin/virtualenvwrapper.sh
 
 
 ## ALIASES
@@ -47,6 +47,8 @@ alias efix="head -1 ~/notes/EmailCleanUp.md | pbcopy"
 # Play ABC News Radio livestream
 alias newsradio="mpg321 http://live-radio01.mediahubaustralia.com/PBW/mp3/ http://live-radio02.mediahubaustralia.com/PBW/mp3/"
 
+# Create a tmp folder for today and go to it
+alias tmptoday="[ -d ~/tmp/`today` ] || mkdir ~/tmp/`today`; cd ~/tmp/`today`"
 
 ## FUNCTIONS
 
