@@ -8,7 +8,7 @@ colors
 
 export RPROMPT='%2~ %n'
 export PROMPT="%m %{%(#~$fg[red]~$fg[blue])%}%#%{$fg[default]%} "
-export PATH=$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH:/Users/caelyx/Library/Python/3.9/bin
+export PATH=/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:$HOME/bin:$PATH
 export EDITOR=`which vim` 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
