@@ -48,7 +48,7 @@ alias efix="head -1 ~/notes/EmailCleanUp.md | pbcopy"
 alias newsradio="mpg321 http://live-radio01.mediahubaustralia.com/PBW/mp3/ http://live-radio02.mediahubaustralia.com/PBW/mp3/"
 
 # Create a tmp folder for today and go to it
-alias tmptoday="[ -d ~/tmp/`today` ] || mkdir ~/tmp/`today`; cd ~/tmp/`today`"
+alias tmptoday="[ -d ~/tmp/\`today\` ] || mkdir ~/tmp/\`today\`; cd ~/tmp/\`today\`"
 
 ## FUNCTIONS
 
