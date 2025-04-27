@@ -76,6 +76,11 @@ inoremap ,[ * [ ]
 
 " }}}
 
+
+" Macro to copy a Quote to the keyboard.
+nnoremap <Leader>q 0f"l"*yt"
+
+
 " Airline configuration {{{
 let g:airline_section_y      =''
 let g:airline_section_warning=''
@@ -137,3 +142,8 @@ onoremap in( :<c-u>normal! f(vi(<cr>
 iabbrev @@    s@sbrown.io
 iabbrev zsig    --<cr>Simon Brown<cr>s@sbrown.io<cr>5A53 7D24 711F 8AA2 6366  242B 1F3F 596C 3CB2 09F0
 iabbrev THe     The
+
+
+" Activate fzf integration
+set rtp+=/opt/homebrew/opt/fzf
+
