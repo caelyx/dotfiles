@@ -36,6 +36,16 @@ alias pbfix='pbpaste | pbcopy' # Usefully forces plaintext
 alias gitup='git add `today`.md && git commit -m `today` && git push' # Update today's notes
 alias katja='mosh -p 9022 katja'
 
+
+# FZF utilities
+alias sd='cd $(find * -type d | fzf)' ## Search for (sub)directory, then cd to it
+
+# FZF aliasses that then activate vim
+alias fzf="fzf --style full --preview 'fzf-preview.sh {}'"
+alias fzfv="fzf --style full --preview 'fzf-preview.sh {}' --bind 'enter:become(vim {})'"
+alias fzfmv="fzf --style full --preview 'fzf-preview.sh {}' --bind 'enter:become(mvim {})'"
+
+
 # Dice rolling
 alias d20="qrandom --int --min 1 --max 20" 
 alias d12="qrandom --int --min 1 --max 12" 
