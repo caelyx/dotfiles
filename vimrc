@@ -103,6 +103,16 @@ augroup END "}}}
 " Tell VimWiki where to find content, and to use markdown
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
 
+" Auto-populate new vimwiki diary pages with a date header
+"autocmd BufNewFile ~/notes/diary/[0-9-]*.md :silent %!echo "\# `date -d '%:t:r' +'\%A, \%B \%d \%Y'`\n"
+autocmd BufNewFile ~/notes/diary/[0-9-]*.md call append(0, [
+      \ '# ' . strftime('%F %A',
+      \   strptime('%Y-%m-%d', expand('%:t:r'))
+      \ ),
+      \ ''
+      \ ])
+
+
 " Todo list mapping
 nnoremap <Leader>tt :VimwikiToggleListItem<CR>
 
