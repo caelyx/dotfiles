@@ -111,3 +111,5 @@ set pgp_good_sign="^gpg: Good signature from"
 set pgp_auto_decode=yes
 
 auto_view text/html
+alternative_order text/plain text/enriched text/html
+

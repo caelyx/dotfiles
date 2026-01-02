@@ -90,18 +90,36 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Text & Markdown files {{{
 augroup filetype_txt 
+    autocmd!
     " Activate wrapping and spell check for text files
     autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap
     autocmd BufNewFile,BufRead *.txt,*.md setlocal spell spelllang=en_au
     " Automatically write text files on Cmd-Tab or equiv
-    autocmd FocusLost *.txt,*.md :write
+    autocmd FocusLost *.txt,*.md if &l:modifiable && !&l:readonly && &l:buftype == '' | write | endif
+    " autocmd FocusLost *.txt,*.md :write " Previous version; too aggressive
     " Mark task done ('[ ] ' -> '[x] ') and move to the bottom of the file.
     " Overwrites mark 'a'
-    autocmd BufNewFile,BufRead *.txt,*.md nnoremap <leader>x :<c-u>normal! k0majlrxddGp`aj<cr>
+    autocmd BufNewFile,BufRead *.txt,*.md nnoremap <buffer> <leader>x :<c-u>normal! k0majlrxddGp`aj<cr>
 augroup END "}}}
+
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
 
 " Tell VimWiki where to find content, and to use markdown
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
+
+" Auto-populate new vimwiki diary pages with a date header
+"autocmd BufNewFile ~/notes/diary/[0-9-]*.md :silent %!echo "\# `date -d '%:t:r' +'\%A, \%B \%d \%Y'`\n"
+autocmd BufNewFile ~/notes/diary/[0-9-]*.md call append(0, [
+      \ '# ' . strftime('%F %A',
+      \   strptime('%Y-%m-%d', expand('%:t:r'))
+      \ ),
+      \ ''
+      \ ])
+
 
 " Todo list mapping
 nnoremap <Leader>tt :VimwikiToggleListItem<CR>
