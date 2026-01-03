@@ -6,8 +6,6 @@
 " Airline - https://github.com/vim-airline/vim-airline
 " Jekyll plugin - https://github.com/parkr/vim-jekyll
 
-execute pathogen#infect()
-
 syntax on 
 set background=dark
 colo vividchalk
@@ -76,6 +74,9 @@ inoremap ,[ * [ ]
 
 " }}}
 
+" vim-commentary
+nmap <Leader>/ gcc
+vmap <Leader>/ gc
 
 " Macro to copy a Quote to the keyboard.
 nnoremap <Leader>q 0f"l"*yt"
@@ -162,6 +163,10 @@ iabbrev zsig    --<cr>Simon Brown<cr>s@sbrown.io<cr>5A53 7D24 711F 8AA2 6366  24
 iabbrev THe     The
 
 
-" Activate fzf integration
-set rtp+=/opt/homebrew/opt/fzf
+" FZF integration - check common installation paths
+if isdirectory('/opt/homebrew/opt/fzf')
+    set rtp+=/opt/homebrew/opt/fzf
+elseif isdirectory('/usr/share/doc/fzf/examples')
+    set rtp+=/usr/share/doc/fzf/examples
+endif
 
