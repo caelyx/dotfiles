@@ -2,6 +2,7 @@
 setopt nomenucomplete # Show the list of possible completions
 setopt autolist
 setopt nolistbeep # Dont ring the bell when match is ambiguous
+setopt AUTO_PUSHD # Automatically add directories to the stack with `cd`
 
 autoload colors
 colors
