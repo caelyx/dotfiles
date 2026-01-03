@@ -4,6 +4,7 @@ setopt autolist
 setopt nolistbeep # Dont ring the bell when match is ambiguous
 setopt AUTO_PUSHD # Automatically add directories to the stack with `cd`
 
+autoload zmv
 autoload colors
 colors
 
@@ -33,6 +34,7 @@ alias -g G=' | egrep '
 alias -g L=' | less '
 alias -g O=' | sort '
 alias -g EO="2>&1" # STDERR into STDOUT
+
 alias today='date "+%F"'
 alias pbfix='pbpaste | pbcopy' # Usefully forces plaintext
 alias gitup='git add `today`.md && git commit -m `today` && git push' # Update today's notes
@@ -121,3 +123,8 @@ topo_render_r () { # Render the standard-issue (bitmap) reference basemap of the
 if [ -f ~/.dotfiles/zshrc.local ]; then
     source ~/.dotfiles/zshrc.local
 fi
+
+# Load all zsh config files from ~/.dotfiles/zsh/
+for config_file in ~/.dotfiles/zsh.d/*.zsh(N); do
+    source "$config_file"
+done
