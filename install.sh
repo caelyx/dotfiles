@@ -4,7 +4,7 @@ set -euo pipefail
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Symlink dotfiles
-for x in muttrc muttrc.color pythonrc screenrc vimrc gvimrc zshrc; do
+for x in muttrc muttrc.color pythonrc screenrc vimrc gvimrc zshrc gitconfig; do
     target="$HOME/.$x"
     if [[ -L "$target" ]]; then
         echo "Skipping $x (symlink exists)"
@@ -15,6 +15,13 @@ for x in muttrc muttrc.color pythonrc screenrc vimrc gvimrc zshrc; do
         echo "Linked $x"
     fi
 done
+
+# macOS-specific setup
+if [[ "$OSTYPE" == darwin* ]]; then
+    # Put Containerfile.base for agent sandbox in the right place for Apple Containers
+    mkdir -p "$HOME/.config/containers"
+    ln -s "$DOTFILES_DIR/Containerfile.base" "$HOME/.config/containers/
+fi
 
 # Vim plugins (native packages)
 PACK_DIR="$HOME/.vim/pack/plugins/start"
@@ -28,6 +35,7 @@ plugins=(
     "https://github.com/vim-airline/vim-airline"
     "https://github.com/parkr/vim-jekyll"
     "https://github.com/preservim/vim-pencil"
+    "https://github.com/tpope/vim-commentary"
 )
 
 for url in "${plugins[@]}"; do
