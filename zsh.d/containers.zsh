@@ -20,14 +20,9 @@ _agentic_ensure_service() {
 _agentic_mounts() {
     _mounts=()
     _mounts+=(--volume "$(pwd):/workspace/src")
-    # Mount actual files from .dotfiles (not symlinks - VZ framework can't mount symlinks)
-    _mounts+=(--volume "$HOME/.dotfiles/zshrc:/home/agent/.zshrc:ro")
+    # Mount directories only - VZ framework cannot mount individual files
     _mounts+=(--volume "$HOME/.dotfiles:/home/agent/.dotfiles:ro")
-    _mounts+=(--volume "$HOME/.dotfiles/vimrc:/home/agent/.vimrc:ro")
     _mounts+=(--volume "$HOME/.vim:/home/agent/.vim:ro")
-    _mounts+=(--volume "$HOME/.gitconfig:/home/agent/.gitconfig:ro")
-    _mounts+=(--volume "$HOME/.claude:/home/agent/.claude:ro")
-    _mounts+=(--volume "$HOME/.codex:/home/agent/.codex:ro")
 }
 
 agentic-base-rebuild() {
