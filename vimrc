@@ -118,6 +118,9 @@ autocmd BufNewFile ~/notes/diary/[0-9-]*.md call append(0, [
       \ ''
       \ ])
 
+" Make vimwiki previous/next day diary hotkeys work on macOS
+nnoremap <Leader><Up> :VimwikiDiaryPrevDay<CR>
+nnoremap <Leader><Down> :VimwikiDiaryNextDay<CR>
 
 " Todo list mapping
 nnoremap <Leader>tt :VimwikiToggleListItem<CR>
