@@ -103,11 +103,14 @@ augroup filetype_txt
     autocmd BufNewFile,BufRead *.txt,*.md nnoremap <buffer> <leader>x :<c-u>normal! k0majlrxddGp`aj<cr>
 augroup END "}}}
 
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
+  autocmd FileType text         call pencil#init()({'wrap': 'hard'})
 augroup END
+nnoremap <Leader>p :PencilToggle<CR>
 
 " Tell VimWiki where to find content, and to use markdown
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
